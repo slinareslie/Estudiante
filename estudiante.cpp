@@ -18,6 +18,9 @@ class Estudiante{
             if(codi>p.getCodi()){
                 return 1;
             }
+            else{
+                return 0;
+            }
         }
         void ImprimeEst(){
             cout<<codi<<"   "<<nomb<<"   "<<prom;
@@ -34,26 +37,25 @@ class Estudiante{
         }
 };
 
-
 void interDirecto(Estudiante A[], int n){
-    string aux;
+    Estudiante aux;
     for(int i=0;i<n-1;i++){
         for(int j=0;j<n-2;j++){
-            if(A[j]<A[j+1]){
-                aux=A[j].getCodi();
+            if(A[j]<A[j+1]==1){
+                aux=A[j];
                 A[j]=A[j+1];
-                A[j+1].getCodi()=aux;
+                A[j+1]=aux;
             }
         }
     }
 }
 
-
 int main(){
     int n=0;
     cout<<"Inserte el numero de estudiantes: ";cin>>n;
     Estudiante estu[n];
-    for(int i=0;i<n;n++){
+
+    for(int i=0;i<n;i++){
         estu[i].inserEstudiante();
     }
 
@@ -65,7 +67,7 @@ int main(){
         }
         else{
         for(int i=0;i<n;i++){
-            archivo<<"\n"<<estu[i].getCodi()<<"   "<<estu[i].getNomb()<<"   "<<estu[i].getProm();
+            archivo<<estu[i].getCodi()<<"   "<<estu[i].getNomb()<<"   "<<estu[i].getProm()<<endl;
             estu[i].getCodi()="\0";
         }
         archivo.close();
