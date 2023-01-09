@@ -15,8 +15,8 @@ class Estudiante{
             cout<<"\nPromedio: ";cin>>prom;
         }
         int operator <(Estudiante p){
-            if(codi==p.getCodi()){
-                ret
+            if(codi>p.getCodi()){
+                return 1;
             }
         }
         void ImprimeEst(){
@@ -36,13 +36,13 @@ class Estudiante{
 
 
 void interDirecto(Estudiante A[], int n){
-    int aux;
+    string aux;
     for(int i=0;i<n-1;i++){
         for(int j=0;j<n-2;j++){
-            if(A[j]>A[j+1]){
-                aux=A[j];
+            if(A[j]<A[j+1]){
+                aux=A[j].getCodi();
                 A[j]=A[j+1];
-                A[j+1]=aux;
+                A[j+1].getCodi()=aux;
             }
         }
     }
@@ -57,8 +57,22 @@ int main(){
         estu[i].inserEstudiante();
     }
 
+    interDirecto(estu,n);
 
-
-
+    ofstream archivo("estudiantes.txt",ios::app);
+        if(!archivo.is_open()){
+            cout<<"No se puede abrir el archivo"<<endl;
+        }
+        else{
+        for(int i=0;i<n;i++){
+            archivo<<"\n"<<estu[i].getCodi()<<"   "<<estu[i].getNomb()<<"   "<<estu[i].getProm();
+            estu[i].getCodi()="\0";
+        }
+        archivo.close();
+        }
+        
+    return 0;
 }
+
+
 
